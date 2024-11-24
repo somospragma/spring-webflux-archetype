@@ -1,0 +1,66 @@
+spring:
+  application:
+    name: scheme_reactive
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+server:
+  port: ${SERVER_PORT:8080}
+  host: ${SERVER_HOST:localhost}
+  compression:
+    enabled: true
+  http2:
+    enabled: true
+
+cache:
+  specification: maximumSize=100,expireAfterWrite=36000s
+amazon:
+  dynamo:
+    users:
+      table:  PRG.Stock
+      timelogin: 900
+      primaryKeyName: dni
+      consistentRead: false
+
+  aws:
+    accesskey: NONE
+    secretkey: NONE
+    region: us-east-1
+
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
+logging:
+  level:
+    org.apache.http: DEBUG
+    org.springframework: ERROR
+    log4j.logger.org.apache.http.wire: DEBUG
+    log4j.logger.com.amazonaws: WARN
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+    file: "%d %p %c{1.} [%t] %m%n"
+
+data:
+  isProd: ${IS_PROD:false}
+  showErrorData: ${SHOW_ERRORS_DATA:true}
+
+feign:
+  httpclient:
+    disableSslValidation: true
+    enabled: false
+  okhttp:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 30000
+        readTimeout: 30000
+        loggerLevel: FULL
