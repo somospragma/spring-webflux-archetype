@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: scheme_reactive
+  namespace: reactive
+spec:
+  selector:
+    app: scheme_reactive
+  ports:
+    - name: default
+      protocol: TCP
+      port: 80
+      targetPort: 8080
