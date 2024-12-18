@@ -11,19 +11,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @SpringBootApplication
-@EnableFeignClients(basePackages = {"com.scheme.reactive.scheme_reactive.feign"})
-@ComponentScan(basePackages = {"com.scheme.reactive.scheme_reactive.scheme_reactive"})
+@EnableFeignClients(basePackages = { "com.scheme.reactive.scheme_reactive.feign" })
+@ComponentScan(basePackages = { "com.scheme.reactive.scheme_reactive.scheme_reactive" })
 public class SchemeReactiveApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SchemeReactiveApplication.class, args);
-		turnOfInsecureLogger();
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SchemeReactiveApplication.class, args);
+        turnOfInsecureLogger();
+    }
 
-	private static void turnOfInsecureLogger(){
-		Logger log = LoggerFactory.getLogger("org.apache.http.wire");
+    private static void turnOfInsecureLogger() {
+        Logger log = LoggerFactory.getLogger("org.apache.http.wire");
         log.debug(log.getClass().getCanonicalName());
-        ch.qos.logback.classic.Logger lg = (ch.qos.logback.classic.Logger)log;
+        ch.qos.logback.classic.Logger lg = (ch.qos.logback.classic.Logger) log;
         lg.setLevel(Level.ERROR);
         lg.setAdditive(false);
     }
